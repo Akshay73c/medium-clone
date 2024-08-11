@@ -74,7 +74,7 @@ blogRouter.post("/", async (c) => {
   });
 });
 
-blogRouter.put("/", async (c) => {
+blogRouter.put("/:id", async (c) => {
   const body = await c.req.json();
   const { success } = updateBlogInput.safeParse(body);
   if (!success) {
@@ -87,9 +87,11 @@ blogRouter.put("/", async (c) => {
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 
+  const id = c.req.param("id");
+
   const post = await prisma.post.update({
     where: {
-      id: body.id,
+      id: Number(id)
     },
     data: {
       title: body.title,
@@ -133,7 +135,7 @@ blogRouter.get("/:id", async (c) => {
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 
-  const id = await c.req.param("id");
+  const id = c.req.param("id");
 
   try {
     const post = await prisma.post.findFirst({
