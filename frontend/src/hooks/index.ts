@@ -8,6 +8,7 @@ export interface Blog {
   id: number;
   author: {
     name: string;
+    email: string
   };
 }
 
@@ -24,7 +25,6 @@ export const useBlogs = () => {
       })
       .then((response) => {
         setBlogs(response.data.posts);
-        console.log(blogs);
         setLoading(false);
       });
   }, []);
@@ -55,5 +55,35 @@ export const useBlog = ({ id }: { id: string }) => {
   return {
     loading,
     blog,
+  };
+};
+
+export interface User {
+  name: string;
+  email: string;
+  id: string;
+  password: string
+}
+
+export const useUser = () => {
+  const [userLoading, setLoading] = useState(true);
+  const [user, setUser] = useState<User>();
+
+  useEffect(() => {
+    axios
+      .get(`${BACKEND_URL}/api/v1/user`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        },
+      })
+      .then((response) => {
+        setUser(response.data.userData);
+        setLoading(false);
+      });
+  }, []);
+
+  return {
+    userLoading,
+    user,
   };
 };

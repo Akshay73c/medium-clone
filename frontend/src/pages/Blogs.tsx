@@ -28,7 +28,7 @@ export const Blogs = () => {
         <div className="max-w-xl">
           {blogs.map((blog) => (
             <BlogCard
-              authorName={blog.author.name || "Anonymous"}
+              authorName={blog.author.email}
               title={blog.title}
               content={blog.content}
               id={blog.id}

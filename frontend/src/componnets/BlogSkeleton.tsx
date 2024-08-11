@@ -16,7 +16,6 @@ export const BlogSkeleton = () => {
       <div>
         <span className="sr-only">Loading...</span>
       </div>
-      ;
     </div>
   );
 };

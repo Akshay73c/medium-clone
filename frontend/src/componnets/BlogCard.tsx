@@ -38,13 +38,13 @@ export const BlogCard = ({
   );
 };
 
-export function Avatar({ name, size }: { name: string; size?: number }) {
+export function Avatar({ name }: { name: string }) {
   return (
     <div
-      className={`relative inline-flex items-center justify-center w-${size} h-6 overflow-hidden  rounded-full bg-gray-400`}
+      className={`relative inline-flex items-center justify-center w-9 h-9 overflow-hidden  rounded-full bg-gray-400`}
     >
-      <span className="text-xs text-gray-600 dark:text-gray-300">
-        {name[0]}
+      <span className="text-lg dark:text-gray-100">
+        {name[0].toUpperCase()}
       </span>
     </div>
   );

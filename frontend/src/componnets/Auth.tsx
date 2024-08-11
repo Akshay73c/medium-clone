@@ -7,7 +7,7 @@ import { BACKEND_URL } from "../config";
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
   const navigate = useNavigate();
 
-  const [postInputs, setPostInputs] = useState<SignupInput>({
+  const [userInputs, setUserInputs] = useState<SignupInput>({
     name: "",
     username: "",
     password: "",
@@ -17,8 +17,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     try {
       const response = await axios.post(
         `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
-
-        postInputs
+        userInputs
       );
       const jwt = response.data.jwt;
       localStorage.setItem("jwt", jwt);
@@ -51,10 +50,10 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             {type === "signup" ? (
               <LabelledInput
                 label="Name"
-                placeholder="Akshay Chavan"
+                placeholder="Your Name"
                 onChange={(e) => {
-                  setPostInputs({
-                    ...postInputs, //means retain username and passowrd
+                  setUserInputs({
+                    ...userInputs, //means retain username and passowrd
                     name: e.target.value, // and update name
                   });
                 }}
@@ -63,10 +62,10 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
 
             <LabelledInput
               label="Username"
-              placeholder="akshay@gmail.com"
+              placeholder="user@gmail.com"
               onChange={(e) => {
-                setPostInputs({
-                  ...postInputs, //means retain username and passowrd
+                setUserInputs({
+                  ...userInputs, //means retain username and passowrd
                   username: e.target.value, // and update name
                 });
               }}
@@ -76,8 +75,8 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
               placeholder="password"
               type="password"
               onChange={(e) => {
-                setPostInputs({
-                  ...postInputs, //means retain username and passowrd
+                setUserInputs({
+                  ...userInputs, //means retain username and passowrd
                   password: e.target.value, // and update name
                 });
               }}
