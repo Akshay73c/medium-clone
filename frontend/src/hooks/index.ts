@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../config";
+import { useNavigate } from "react-router-dom";
 
 export interface Blog {
   content: string;
@@ -79,6 +80,11 @@ export const useUser = () => {
       .then((response) => {
         setUser(response.data.userData);
         setLoading(false);
+      }).catch((err) => {
+        const navigate = useNavigate();
+        // alert("You are not logged in")
+        console.log(err)
+        navigate('/signin')
       });
   }, []);
 

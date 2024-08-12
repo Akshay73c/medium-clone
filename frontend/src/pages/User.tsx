@@ -2,7 +2,6 @@ import { Appbar } from "../componnets/Appbar";
 import { Avatar, BlogCard } from "../componnets/BlogCard";
 import { useBlogs, User, useUser } from "../hooks";
 import { BlogSkeleton } from "../componnets/BlogSkeleton";
-import { useNavigate } from "react-router-dom";
 
 export default function UserPage() {
 
@@ -10,8 +9,6 @@ export default function UserPage() {
     const { userLoading, user } = useUser()
 
     if (loading || userLoading || !user) {
-        const navigate = useNavigate()
-        navigate('/signin')
         return (
             <div>
                 <Appbar />
