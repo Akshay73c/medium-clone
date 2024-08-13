@@ -89,7 +89,7 @@ userRouter.get("/", async (c) => {
   const authHeader = c.req.header("Authorization");
   if (!authHeader) {
     c.status(401);
-    return c.json({ error: "You're not logged in" });
+    return c.json({ error: "You're not logged in coz not authHeader" });
   }
   try {
     const token = authHeader.split(" ")[1];

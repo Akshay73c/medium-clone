@@ -17,16 +17,22 @@ export const useBlogs = () => {
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState<Blog[]>([]);
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     axios
       .get(`${BACKEND_URL}/api/v1/blog/bulk`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          Authorization: localStorage.getItem("jwt"),
         },
       })
       .then((response) => {
         setBlogs(response.data.posts);
         setLoading(false);
+      }).catch((err) => {
+        if (err.response.status === 401) {
+          navigate('/signin')
+        }
       });
   }, []);
 
@@ -40,17 +46,23 @@ export const useBlog = ({ id }: { id: string }) => {
   const [loading, setLoading] = useState(true);
   const [blog, setBlog] = useState<Blog>();
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     axios
       .get(`${BACKEND_URL}/api/v1/blog/${id}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          Authorization: localStorage.getItem("jwt"),
         },
       })
       .then((response) => {
         setBlog(response.data.post);
         setLoading(false);
-      });
+      }).catch((err) => {
+        if (err.response.status === 401) {
+          navigate('/signin')
+        }
+      });;
   }, []);
 
   return {
@@ -67,24 +79,25 @@ export interface User {
 }
 
 export const useUser = () => {
-  const [userLoading, setLoading] = useState(true);
   const [user, setUser] = useState<User>();
+  const [userLoading, setLoading] = useState(true);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios
       .get(`${BACKEND_URL}/api/v1/user`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          Authorization: localStorage.getItem("jwt"),
         },
       })
       .then((response) => {
         setUser(response.data.userData);
         setLoading(false);
       }).catch((err) => {
-        const navigate = useNavigate();
-        // alert("You are not logged in")
-        console.log(err)
-        navigate('/signin')
+        if (err.response.status === 401) {
+          navigate('/signin')
+        }
       });
   }, []);
 

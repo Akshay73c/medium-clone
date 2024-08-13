@@ -10,7 +10,7 @@ export const Publish = () => {
   async function publishPost() {
     await axios.post(`${BACKEND_URL}/api/v1/blog`, { title, content }, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        Authorization: localStorage.getItem("jwt")
       }
     });
     alert("Posted!")
