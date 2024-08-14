@@ -5,6 +5,7 @@ import { Blog } from "./pages/Blog";
 import { Blogs } from "./pages/Blogs";
 import { Publish } from "./pages/Publish";
 import UserPage from "./pages/User";
+import UserSettings from "./pages/UserSettings";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/publish" element={<Publish />} />
           <Route path="/user" element={<UserPage />} />
+          <Route path="/user/settings/account" element={<UserSettings />} />
         </Routes>
       </BrowserRouter>
     </>

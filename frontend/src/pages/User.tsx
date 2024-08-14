@@ -2,6 +2,7 @@ import { Appbar } from "../componnets/Appbar";
 import { Avatar, BlogCard } from "../componnets/BlogCard";
 import { useBlogs, User, useUser } from "../hooks";
 import { BlogSkeleton } from "../componnets/BlogSkeleton";
+import { useNavigate } from "react-router-dom";
 
 export default function UserPage() {
 
@@ -25,31 +26,33 @@ export default function UserPage() {
 
     return <div>
         <Appbar />
-        <div className="grid grid-cols-2">
-            <div className="p-2flex justify-center flex-col">
-                {blogs.map((blog) => (
-                    <BlogCard
-                        authorName={blog.author.email}
-                        title={blog.title}
-                        content={blog.content}
-                        id={blog.id}
-                        publishedDate={"2nd feb 2024"}
-                    />
-
-                ))}
-            </div>
-            <div className="flex justify-center">
-                <div>
-                    <UserCard user={user} />
+        <div className="md:grid md:grid-cols-3 flex justify-center flex-col">
+            <div className="col-span-2">
+                <div className="flex justify-center">
+                    <div className="max-w-2xl">
+                        {blogs.map((blog) => (
+                            <BlogCard
+                                authorName={blog.author.email}
+                                title={blog.title}
+                                content={blog.content}
+                                id={blog.id}
+                                publishedDate={"2nd feb 2024"}
+                            />
+                        ))}
+                    </div>
                 </div>
+            </div>
+            <div className="flex justify-center col-span-1 pr-40">
+                <UserCard user={user} />
             </div>
         </div>
     </div>
 }
 
 export const UserCard = ({ user }: { user: User }) => {
-    return <div>
-        <figure className="flex flex-col items-center justify-center p-8 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e ">
+    const navigate = useNavigate()
+    return <div className=" p-8">
+        <figure className="flex flex-col items-center justify-center p-10 text-center border border-blue-100 rounded-sm">
             <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 ">
                 <h3 className="text-lg font-semibold text-gray-900 ">{user.name}</h3>
                 <p className="my-4">About coming soon</p>
@@ -63,7 +66,11 @@ export const UserCard = ({ user }: { user: User }) => {
             </figcaption>
         </figure>
         <div className="flex justify-center pt-4">
-            <button type="button" className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+            <button type="button"
+                onClick={() => {
+                    navigate('/user/settings/account')
+                }}
+                className="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
             >Edit Profile</button>
         </div>
     </div>

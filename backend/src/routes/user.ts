@@ -121,7 +121,7 @@ userRouter.get("/", async (c) => {
   }
 });
 
-userRouter.put('/userId', async (c) => {
+userRouter.put('/:userId', async (c) => {
   const id = c.req.param("userId");
 
   const body = await c.req.json();
@@ -141,7 +141,8 @@ userRouter.put('/userId', async (c) => {
     where: { id: id },
     data: {
       name: body.name,
-      email: body.email
+      email: body.email,
+      password: body.password
     }
   })
 
