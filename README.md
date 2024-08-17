@@ -2,18 +2,20 @@
 
 A full-stack clone of medium blogging website enabling users to create, share, and discover engaging content
 
-##### Hosted here : [Check it out!](https://travellwith02.netlify.app)
+##### Hosted here : [Check it out!](https://medium-clone-umber-ten.vercel.app/signup)
 
-<!-- ## 💡Motivation
-All in a one app. -->
-<!--
-## 📲What it does?
+## 💡Motivation
+
+- Deepen full-stack knowledge and code complex features
+
+- Explore serverless architecture
+<!-- ## 📲What it does?
 - suggest route based on>less traffic, places to visit,amenties included.(UNDER CONSTRUCTION)
 - Search for nearby automobiles to share or book. -->
 
 ## 🎛️ Techs used
 
-- [React JS]()
+- [ReactJS]()
 
 - [Hono/Express]()
 
