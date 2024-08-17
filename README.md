@@ -39,7 +39,7 @@ A full-stack clone of medium blogging website enabling users to create, share, a
 ## Running the App locally
 
 ```bash
-git clone https://github.com/SayantaniDeb/Travellwithus
+git clone https://github.com/Akshay73c/medium-clone.git
 ```
 
 ```bash
