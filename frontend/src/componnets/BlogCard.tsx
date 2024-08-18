@@ -21,7 +21,7 @@ export const BlogCard = ({
         <div className="flex">
           <Avatar name={authorEmail} />
           <div className="flex justify-center flex-col font-extralight pl-2 text-sm">
-            @{authorEmail.split('@').at(0)}
+            @{authorEmail.split('@')[0]}
           </div>
           <div className="flex justify-center flex-col pl-2 font-thin text-slate-400 text-sm">
             {publishedDate}
