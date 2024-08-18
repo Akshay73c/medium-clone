@@ -1,12 +1,12 @@
 import { Appbar } from "../componnets/Appbar";
 import { Avatar, BlogCard } from "../componnets/BlogCard";
-import { useBlogs, User, useUser } from "../hooks";
+import { User, useUser, useUserBlogs } from "../hooks";
 import { BlogSkeleton } from "../componnets/BlogSkeleton";
 import { useNavigate } from "react-router-dom";
 
 export default function UserPage() {
 
-    const { loading, blogs } = useBlogs();
+    const { loading, blogs } = useUserBlogs();
     const { userLoading, user } = useUser()
 
     if (loading || userLoading || !user) {
@@ -27,12 +27,12 @@ export default function UserPage() {
     return <div>
         <Appbar />
         <div className="md:grid md:grid-cols-3 flex justify-center flex-col">
-            <div className="col-span-2">
+            <div className="col-span-2 md:">
                 <div className="flex justify-center">
                     <div className="max-w-2xl">
                         {blogs.map((blog) => (
                             <BlogCard
-                                authorName={blog.author.email}
+                                authorEmail={blog.author.email}
                                 title={blog.title}
                                 content={blog.content}
                                 id={blog.id}

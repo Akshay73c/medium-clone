@@ -106,3 +106,33 @@ export const useUser = () => {
     user,
   };
 };
+
+export const useUserBlogs = () => {
+  const [loading, setLoading] = useState(true);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    axios
+      .get(`${BACKEND_URL}/api/v1/user/blogs`, {
+        headers: {
+          Authorization: localStorage.getItem("jwt"),
+        },
+      })
+      .then((response) => {
+        console.log(response.data.blogs)
+        setBlogs(response.data.blogs);
+        setLoading(false);
+      }).catch((err) => {
+        if (err.response.status === 401) {
+          navigate('/signin')
+        }
+      });
+  }, []);
+
+  return {
+    loading,
+    blogs,
+  };
+};

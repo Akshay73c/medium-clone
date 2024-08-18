@@ -24,19 +24,23 @@ export const Blogs = () => {
   return (
     <div>
       <Appbar />
-      <div className="flex justify-center">
-        <div className="max-w-xl">
-          {blogs.map((blog) => (
-            <BlogCard
-              authorName={blog.author.email}
-              title={blog.title}
-              content={blog.content}
-              id={blog.id}
-              publishedDate={"2nd feb 2024"}
-            />
-          ))}
+      <div className="flex justify-start flex-col">
+        <div className="pl-20"><div className=" border-b border-slate-600 w-fit font-serif text-gray-600">For you</div></div>
+        <div className="flex justify-center">
+          <div className="max-w-xl">
+            {blogs.map((blog) => (
+              <BlogCard
+                authorEmail={blog.author.email}
+                title={blog.title}
+                content={blog.content}
+                id={blog.id}
+                publishedDate={"2nd feb 2024"}
+              />
+            ))}
+          </div>
         </div>
       </div>
+
     </div>
   );
 };
