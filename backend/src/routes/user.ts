@@ -150,3 +150,83 @@ userRouter.put('/:userId', async (c) => {
     updatedUser
   })
 })
+
+userRouter.get("/blogs", async (c) => {
+  const authHeader = c.req.header("Authorization");
+  if (!authHeader) {
+    c.status(401);
+    return c.json({ error: "You're not logged in coz not authHeader" });
+  }
+  try {
+    const token = authHeader.split(" ")[1];
+
+    const user = await verify(token, c.env.JWT_SECRET);
+    if (!user) {
+      c.status(401);
+      return c.json({
+        error: "unauthorized",
+      });
+    }
+    const id: any = user.id;
+
+    const prisma = new PrismaClient({
+      datasourceUrl: c.env.DATABASE_URL
+    }).$extends(withAccelerate())
+
+    const blogs = await prisma.post.findMany({
+      where: {
+        authorId: id
+      },
+      select: {
+        content: true,
+        title: true,
+        id: true,
+        author: {
+          select: {
+            name: true,
+            id: true,
+            email: true,
+          },
+        },
+      }
+    })
+    return c.json({ blogs })
+  } catch (e) {
+    console.log(e);
+    return c.json({
+      message: "You're not logged in",
+      error: e
+    });
+  }
+});
+
+userRouter.put('/:userId', async (c) => {
+  const id = c.req.param("userId");
+
+  const body = await c.req.json();
+  const { success } = signupInput.safeParse(body);
+  if (!success) {
+    c.status(411);
+    return c.json({
+      message: "Inputs not correct",
+    });
+  }
+
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL
+  }).$extends(withAccelerate())
+
+  const updatedUser = await prisma.user.update({
+    where: { id: id },
+    data: {
+      name: body.name,
+      email: body.email,
+      password: body.password
+    }
+  })
+
+  return c.json({
+    updatedUser
+  })
+})
+
