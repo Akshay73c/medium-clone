@@ -26,23 +26,19 @@ export default function UserPage() {
 
     return <div>
         <Appbar />
-        <div className="md:grid md:grid-cols-3 flex justify-center flex-col">
-            <div className="col-span-2 md:">
-                <div className="flex justify-center">
-                    <div className="max-w-2xl">
-                        {blogs.map((blog) => (
-                            <BlogCard
-                                authorEmail={blog.author.email}
-                                title={blog.title}
-                                content={blog.content}
-                                id={blog.id}
-                                publishedDate={"2nd feb 2024"}
-                            />
-                        ))}
-                    </div>
-                </div>
+        <div className="md:grid md:grid-cols-5 flex justify-center flex-col">
+            <div className="md:col-span-3 m-10">
+                {blogs.map((blog) => (
+                    <BlogCard
+                        authorEmail={blog.author.email}
+                        title={blog.title}
+                        content={blog.content}
+                        id={blog.id}
+                        publishedDate={"2nd feb 2024"}
+                    />
+                ))}
             </div>
-            <div className="flex justify-center col-span-1 pr-40">
+            <div className="md:col-span-2 flex justify-center">
                 <UserCard user={user} />
             </div>
         </div>
@@ -51,8 +47,8 @@ export default function UserPage() {
 
 export const UserCard = ({ user }: { user: User }) => {
     const navigate = useNavigate()
-    return <div className=" p-8">
-        <figure className="flex flex-col items-center justify-center p-10 text-center border border-blue-100 rounded-sm">
+    return <div className="m-10">
+        <figure className="flex flex-col justify-center p-10 text-center border border-blue-200 rounded-sm">
             <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 ">
                 <h3 className="text-lg font-semibold text-gray-900 ">{user.name}</h3>
                 <p className="my-4">About coming soon</p>

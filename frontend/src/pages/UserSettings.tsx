@@ -59,7 +59,7 @@ function UserInfo({ user }: { user: User }) {
         <div className="w-2/3 text-md">
             <div className="flex justify-between p-4 border-b border-slate-100">
                 <div>
-                    {user.id}
+                    {user.name}
                 </div>
                 <input type="text"
                     value={userData.name}

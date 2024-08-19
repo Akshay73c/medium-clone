@@ -24,10 +24,10 @@ export const Blogs = () => {
   return (
     <div>
       <Appbar />
-      <div className="flex justify-start flex-col">
-        <div className="pl-20"><div className=" border-b border-slate-600 w-fit font-serif text-gray-600">For you</div></div>
-        <div className="flex justify-center">
-          <div className="max-w-xl">
+      <div className="flex justify-center flex-col">
+        <div className="lg:ml-80 lg:mr-80 ml-10 mr-10">
+          <div className="border-b border-slate-600 w-fit font-serif text-gray-600">For you</div>
+          <div className="flex justify-center flex-col">
             {blogs.map((blog) => (
               <BlogCard
                 authorEmail={blog.author.email}

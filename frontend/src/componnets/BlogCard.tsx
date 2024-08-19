@@ -17,17 +17,16 @@ export const BlogCard = ({
 }: BlogCardProps) => {
   return (
     <Link to={`/blog/${id}`}>
-      <div className="border-b border-slate-200  p-4 w-screen max-w-screen-md cursor-pointer">
+      <div className="border-b border-slate-400  p-4  cursor-pointer">
         <div className="flex">
           <Avatar name={authorEmail} />
           <div className="flex justify-center flex-col font-extralight pl-2 text-sm">
             @{authorEmail.split('@')[0]}
           </div>
-          <div className="flex justify-center flex-col pl-2 font-thin text-slate-400 text-sm">
+          <div className="flex justify-center flex-col font-thin text-slate-400 text-sm">
             {publishedDate}
           </div>
         </div>
-
         <div className="text-2xl font-bold pt-2">{title}</div>
         <div className="text-md font-thin">{content.slice(0, 200) + "..."}</div>
         <div className="text-slate-500 text-sm font-thin pt-4 flex justify-between">
